@@ -4,14 +4,23 @@ part of 'home_bloc.dart';
 final class HomeState extends Equatable {
   final Category category;
 
-  const HomeState({required this.category});
+  final List<Good> goods;
 
-  HomeState.initial()
-      : this(category: Category.all[0]);
+  const HomeState({
+    required this.category,
+    required this.goods,
+  });
 
-  HomeState copyWith({Category? category}) {
+  HomeState.initial({List<Good>? goods})
+      : this(category: Category.all[0], goods: goods ?? []);
+
+  HomeState copyWith({
+    Category? category,
+    List<Good>? goods,
+  }) {
     return HomeState(
-        category: category ?? this.category
+        category: category ?? this.category,
+        goods: goods ?? this.goods,
     );
   }
 

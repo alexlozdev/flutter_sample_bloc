@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_test/screens/start/view/start.dart';
 
+import 'screens/home/bloc/home_bloc.dart';
 import 'screens/start/bloc/start_bloc.dart';
 
 void main() {
@@ -23,6 +24,9 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider(
             create: (_) => StartBloc(),
+          ),
+          BlocProvider(
+            create: (_) => HomeBloc(),
           ),
         ],
         child: const StartScreen(),

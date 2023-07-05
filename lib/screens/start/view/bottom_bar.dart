@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../const/constants.dart';
-import '../bloc/start_bloc.dart';
 import '../../../widgets/common/inkwell/common_inkwell.dart';
 import '../../../widgets/common/text/common_label.dart';
 import '../model/page_item.dart';

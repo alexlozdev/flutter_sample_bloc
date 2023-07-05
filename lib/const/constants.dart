@@ -58,11 +58,5 @@ class Constants {
   /// http url
   static const urlHttp = 'http';
 
-  /// category
-  static const String categoryRide = 'Ride';
-  static const String categoryEat = 'Eat';
-  static const String categoryGrocery = 'Grocery';
-  static const String categoryShop = 'Shop';
-
 
 }

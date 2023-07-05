@@ -3,10 +3,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../const/constants.dart';
-import '../../../model/good.dart';
-import '../../../widgets/common/image/common_image_view.dart';
-import '../../../widgets/common/text/common_label.dart';
+import '../../../../const/constants.dart';
+import '../../../../widgets/common/image/common_image_view.dart';
+import '../../../../widgets/common/text/common_label.dart';
+import '../../model/good.dart';
 
 class GoodBox extends StatelessWidget {
 

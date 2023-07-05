@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_ui_test/screens/home/home.dart';
+import 'package:flutter_ui_test/screens/home/view/home.dart';
 import 'package:get/get.dart';
 
 import '../../../const/constants.dart';
@@ -10,10 +10,10 @@ import '../../../controller/home_controller.dart';
 import '../../../controller/user_controller.dart';
 import '../../../model/basket.dart';
 import '../../../widgets/common/app_bar/common_app_bar.dart';
-import '../model/page_item.dart';
-import 'bottom_bar.dart';
 import '../../../widgets/common/scaffold/common_screen.dart';
 import '../bloc/start_bloc.dart';
+import '../model/page_item.dart';
+import 'bottom_bar.dart';
 
 class StartScreen extends StatefulWidget {
 
@@ -84,11 +84,6 @@ class _StartScreenState extends State<StartScreen> {
     if (pageName == PageItem.home) {
       return HomeScreen(
         portfolios: _homeController.portfolios,
-        category: _homeController.selCategory.value,
-        onCategory: (value) {
-          _homeController.selectCategory(value);
-        },
-        goods: _homeController.goods,
         searchKey: _homeController.dispSearchKey.value,
         onChangedSearchKey: (value, needUpdate) {
           if (needUpdate) {
