@@ -42,7 +42,6 @@ class _StartScreenState extends State<StartScreen> {
     ]);
 
     //_startController.init();
-    _homeController.init();
     _userController.init();
   }
 
@@ -83,7 +82,6 @@ class _StartScreenState extends State<StartScreen> {
   Widget getBody({required String pageName}) {
     if (pageName == PageItem.home) {
       return HomeScreen(
-        portfolios: _homeController.portfolios,
         searchKey: _homeController.dispSearchKey.value,
         onChangedSearchKey: (value, needUpdate) {
           if (needUpdate) {

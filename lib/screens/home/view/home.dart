@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../const/constants.dart';
-import '../../../model/portfolio.dart';
 import '../../../widgets/common/text/common_auto_label.dart';
 import '../../../widgets/common/text_field/common_text_field_search.dart';
 import '../bloc/home_bloc.dart';
@@ -12,8 +11,6 @@ import 'widgets/good_box.dart';
 import 'widgets/portfolio_slider.dart';
 
 class HomeScreen extends StatelessWidget {
-
-  final List<Portfolio> portfolios;
 
   /// search key
   final String searchKey;
@@ -26,7 +23,6 @@ class HomeScreen extends StatelessWidget {
 
   const HomeScreen({
     super.key,
-    required this.portfolios,
     required this.searchKey,
     this.onChangedSearchKey,
     this.onSearch,
@@ -41,7 +37,7 @@ class HomeScreen extends StatelessWidget {
         return Column(
           children: [
             // slider
-            PortfolioSlider(items: portfolios,),
+            PortfolioSlider(items: state.portfolios,),
             Expanded(
               child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: Constants.screenPaddingH),

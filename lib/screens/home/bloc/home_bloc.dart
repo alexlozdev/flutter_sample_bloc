@@ -3,13 +3,18 @@ import 'package:equatable/equatable.dart';
 
 import '../model/category.dart';
 import '../model/good.dart';
+import '../model/portfolio.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  HomeBloc() : super(HomeState.initial(goods: _selectCategory(Category.ride))) {
-
+  HomeBloc() : super(
+    HomeState.initial(
+      goods: _selectCategory(Category.ride),
+      portfolios: _initPortfolios(),
+    )
+  ) {
     /// change selected page
     on<HomeCategoryChanged>((event, emit) {
       final categoryLabel = event.category.label;
@@ -45,5 +50,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     } else {
       return [];
     }
+  }
+
+  /// init portfolios
+  static _initPortfolios() {
+    return [
+      const Portfolio(image: 'assets/images/portfolio1.jpg', comment1: 'RUN WITH US!', comment2: 'LIFE IN THE FAST LANE'),
+      const Portfolio(image: 'assets/images/portfolio2.jpg', comment1: 'REFRESH YOUR FITNESS', comment2: 'LOOK GREAT'),
+      const Portfolio(image: 'assets/images/portfolio3.jpg', comment1: 'NO PAIN, NO GAIN', comment2: 'LOOK MORE FIT'),
+      const Portfolio(image: 'assets/images/portfolio4.jpg', comment1: 'STAY HAPPY, STAY FIT', comment2: 'FITNESS FOR EVERYONE'),
+    ];
   }
 }

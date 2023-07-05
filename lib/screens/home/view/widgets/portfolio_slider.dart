@@ -3,9 +3,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../const/constants.dart';
-import '../../../../model/portfolio.dart';
 import '../../../../widgets/common/image/common_image_view.dart';
 import '../../../../widgets/common/text/common_auto_label.dart';
+import '../../model/portfolio.dart';
 
 class PortfolioSlider extends StatefulWidget {
   /// portfolio items
