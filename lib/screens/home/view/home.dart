@@ -12,22 +12,9 @@ import 'widgets/portfolio_slider.dart';
 
 class HomeScreen extends StatelessWidget {
 
-  /// search key
-  final String searchKey;
-
-  /// callback when changed search key
-  final Function(String searchKey, bool needUpdate)? onChangedSearchKey;
-
-  /// callback when press search
-  final Function()? onSearch;
-
   const HomeScreen({
-    super.key,
-    required this.searchKey,
-    this.onChangedSearchKey,
-    this.onSearch,
-  });
-
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -69,9 +56,11 @@ class HomeScreen extends StatelessWidget {
                     const SizedBox(height: Constants.widgetSpaceV,),
                     // search
                     CommonTextFieldSearch(
-                      selValue: searchKey,
-                      onChanged: onChangedSearchKey,
-                      onSearch: onSearch,
+                      selValue: '',
+                      onChanged: (value, needUpdate) {
+                      },
+                      onSearch: () {
+                      },
                     ),
                     const SizedBox(height: Constants.widgetSpaceV,),
                     // good list

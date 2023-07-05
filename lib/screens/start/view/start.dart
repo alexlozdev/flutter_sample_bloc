@@ -3,14 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_test/screens/home/view/home.dart';
-import 'package:get/get.dart';
 
 import '../../../const/constants.dart';
-import '../../../controller/home_controller.dart';
-import '../../../controller/user_controller.dart';
 import '../../../model/basket.dart';
 import '../../../widgets/common/app_bar/common_app_bar.dart';
 import '../../../widgets/common/scaffold/common_screen.dart';
+import '../../user/bloc/user_bloc.dart';
 import '../bloc/start_bloc.dart';
 import '../model/page_item.dart';
 import 'bottom_bar.dart';
@@ -27,10 +25,6 @@ class StartScreen extends StatefulWidget {
 
 class _StartScreenState extends State<StartScreen> {
 
-  //final StartController _startController = Get.put(StartController());
-  final HomeController _homeController = Get.put(HomeController());
-  final UserController _userController = Get.put(UserController());
-
   @override
   void initState() {
     super.initState();
@@ -41,8 +35,6 @@ class _StartScreenState extends State<StartScreen> {
       DeviceOrientation.portraitDown,
     ]);
 
-    //_startController.init();
-    _userController.init();
   }
 
   static const basketLabel = '1';
@@ -51,50 +43,41 @@ class _StartScreenState extends State<StartScreen> {
   Widget build(BuildContext context) {
 
     return BlocBuilder<StartBloc, StartState>(
-      builder: (context, state) {
-        return CommonScreen(
-          appBar: CommonAppBar(
-            user: _userController.curUser.value,
-            basket: Basket(
-                items: {basketLabel: 4}
-            ),
-            onLeadingPressed: () {
-            },
-          ),
-          body: Container(
-            padding: const EdgeInsets.symmetric(vertical: Constants.screenPaddingV),
-            child: getBody(pageName: state.pageItem.name),
-          ),
-          ad: null,
-          bottom: BottomBar(
-            selectedItem: state.pageItem,
-            items: PageItem.pages,
-            onSelected: (value) {
-              //_startController.selPage.value = value;
-              context.read<StartBloc>().add(StartPageChanged(value));
-            },
-          ),
+      builder: (startContext, startState) {
+        return BlocBuilder<UserBloc, UserState>(
+          builder: (context, state) {
+            return CommonScreen(
+              appBar: CommonAppBar(
+                onLeadingPressed: () {
+                },
+                user: state.user,
+                basket: Basket(
+                    items: {basketLabel: 4}
+                ),
+              ),
+              body: Container(
+                padding: const EdgeInsets.symmetric(vertical: Constants.screenPaddingV),
+                child: getBody(pageItem: startState.pageItem),
+              ),
+              ad: null,
+              bottom: BottomBar(
+                selectedItem: startState.pageItem,
+                items: PageItem.pages,
+                onSelected: (value) {
+                  //_startController.selPage.value = value;
+                  startContext.read<StartBloc>().add(StartPageChanged(value));
+                },
+              ),
+            );
+          },
         );
       },
     );
   }
 
-  Widget getBody({required String pageName}) {
-    if (pageName == PageItem.home) {
-      return HomeScreen(
-        searchKey: _homeController.dispSearchKey.value,
-        onChangedSearchKey: (value, needUpdate) {
-          if (needUpdate) {
-            _homeController.dispSearchKey.value = value;
-          }
-          _homeController.searchKey = value;
-
-        },
-        onSearch: () {
-          _homeController.searchKey = '';
-          _homeController.dispSearchKey.value = '';
-        },
-      );
+  Widget getBody({required PageItem pageItem}) {
+    if (pageItem.name == PageItem.home) {
+      return const HomeScreen();
     } else {
       return Container();
     }

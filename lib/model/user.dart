@@ -1,18 +1,32 @@
-class User {
-  String firstName = '';
+import 'package:equatable/equatable.dart';
 
-  String lastName = '';
+final class User extends Equatable {
+  final String firstName;
 
-  String location = '';
+  final String lastName;
+
+  final String location;
 
   /// avatar image path
-  String avatar = '';
+  final String avatar;
 
   /// login user info
-  User({
+  const User({
     this.firstName = '',
     this.lastName = '',
     this.location = '',
     this.avatar = '',
   });
+
+  @override
+  List<Object?> get props => [firstName, lastName, location, avatar];
+
+  User copyWith({String? firstName, String? lastName, String? location, String? avatar}) {
+    return User(
+      firstName: firstName ?? this.firstName,
+      lastName: lastName ?? this.lastName,
+      location: location ?? this.location,
+      avatar: avatar ?? this.avatar,
+    );
+  }
 }
